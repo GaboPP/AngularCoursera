@@ -2,13 +2,39 @@
     <div class="card-img">
         <img src="https://placeimg.com/380/230/nature" alt="">
         <span>
-            <h4>{{peli}}</h4>
+            <h4>{{position}}°</h4>
         </span>
     </div>
     <div class="card-desc">
-        <h3>{{peli}}</h3>
-        <p>Lorem ipsum dolor s</p>
-        <a href="#" class="btn-card">Read</a>
+        <h3>{{Pelicula.nombre}}</h3>
+        <p>Servicios</p>
+        <ul>
+            <li *ngFor="let s of Pelicula.servicios">
+                <span [ngSwitch]="s">
+                    <i *ngSwitchCase="'cabritas'" style="color: orange">{{s}}</i>
+                    <i *ngSwitchDefault>{{s}}</i>
+                </span>
+            </li>
+        </ul>
+        <div>
+            <a href="#" (click)="voteUp()" appTrackearClick data-trackear-tags="Pelicula_vote_up lista_Peliculas_item">
+                <i class="material-icons md-18">thumb_up</i>
+            </a>
+            &nbsp;
+            <a href="#" (click)="voteDown()" appTrackearClick data-trackear-tags="Pelicula_vote_down lista_Peliculas_item">
+                <i class="material-icons md-18">thumb_down</i>
+            </a>
+            &nbsp;
+            Votos: {{Pelicula.votes}}
+        </div>
+        <hr class="mb-2">
+        <a href="#" class="btn-card" (click)="ir()">Ir!</a>
+        <a href="#" class="btn-card bg-danger text-white" (click)="borrar()">Borrar</a>
+        <hr class="mb-2">
+        <span *ngIf="Pelicula.isSelected()">
+            <span ngNonBindable>{{- PREFERIDO - }}</span>
+            <a [routerLink]="['/sala']">Sala</a>
+        </span>
     </div>
     <ul>
 

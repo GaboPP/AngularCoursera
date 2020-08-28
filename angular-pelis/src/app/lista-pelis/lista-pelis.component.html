@@ -8,25 +8,26 @@
                     <h3 class="mb-0">Whishlist</h3>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Ingresar nombre..." #nombre>
-                        </div>
-                        <button type="submit" class="btn btn-primary" (click)="guardar(nombre.value)">Guardar!</button>
-                    </form>
+                    <app-form-peliculas (onItemAdded)="agregado($event)"></app-form-peliculas>
                 </div>
             </div>
         </div>
     </div>
     <hr class="mb-5">
-    <h1>Lista de peliculas</h1>
-    <ul>
-        <li *ngFor="let d of pelis">{{d}}</li>
-    </ul>
     <div class="row row-flex">
-        <div *ngFor="let d of pelis" class="col-md-4">
-        <app-cartelera [peli]="d"></app-cartelera>
+        <app-cartelera 
+            *ngFor="let p of all;let i=index"
+            [idx]="i+1"
+            [Pelicula]="p" 
+            (clicked)="elegido($event)"
+        ></app-cartelera>
     </div>
+
+    <hr class="mb-5">
+    <div class="row row-flex">
+        <h5>Actividad</h5>
+    <ul>
+        <li *ngFor="let u of updates">{{u}}</li>
+    </ul>
     </div>
 </div>

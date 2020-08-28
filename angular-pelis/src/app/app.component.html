@@ -1,1 +1,20 @@
-<app-lista-pelis></app-lista-pelis>
+
+<div class="container content">
+    <div class="page-header">
+        <h1>Ruteo Simple</h1>
+        <div class="navLinks">
+            <a [routerLink]="['/home']">Home</a>
+            <a [routerLink]="['/sala']">Sala</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>
+            {{title}}
+        </h1>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+<hr class="mb-5">
+
+Fecha: {{time | async}}
