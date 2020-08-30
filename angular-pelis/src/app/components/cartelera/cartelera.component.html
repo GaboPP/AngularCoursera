@@ -33,7 +33,7 @@
         <hr class="mb-2">
         <span *ngIf="Pelicula.isSelected()">
             <span ngNonBindable>{{- PREFERIDO - }}</span>
-            <a [routerLink]="['/sala']">Sala</a>
+            <a [routerLink]="['/sala', Pelicula.id]">Sala</a>
         </span>
     </div>
     <ul>

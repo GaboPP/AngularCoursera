@@ -1,7 +1,7 @@
 export class Peliulas {
     private selected: boolean;
     public servicios: string[];
-    constructor( public nombre: string, public u: string, public votes: number= 0) {
+    constructor( public nombre: string, public u: string, public votes: number= 0, public id: number=0) {
         this.servicios = ['cabritas', 'masajes'];
     }
     isSelected():boolean {

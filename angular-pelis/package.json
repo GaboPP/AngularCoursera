@@ -22,7 +22,9 @@
     "@ngrx/effects": "^6.1.2",
     "@ngrx/store": "^6.1.2",
     "@ngrx/store-devtools": "^6.1.2",
+    "@ngx-translate/core": "^13.0.0",
     "bootstrap": "^4.5.2",
+    "dexie": "^3.0.2",
     "rxjs": "^6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

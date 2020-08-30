@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Peliulas } from '../models/Peliculas.model';
+import { Component, OnInit, Output, EventEmitter, Inject, forwardRef } from '@angular/core';
+import { Peliulas } from '../../models/Peliculas.model';
 import { FormGroup, FormBuilder, Validators, Form, FormControl, ValidatorFn } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import { ajax, AjaxResponse} from 'rxjs/ajax';
+import { APP_CONFIG, AppConfig } from 'src/app/app.module';
 
 @Component({
   selector: 'app-form-peliculas',
@@ -16,7 +17,7 @@ export class FormPeliculasComponent implements OnInit {
   minLong: number = 3;
   searchResults: string[];
 
-  constructor(fb: FormBuilder) { 
+  constructor(fb: FormBuilder, @Inject(forwardRef(() => APP_CONFIG)) private config: AppConfig) { 
     this.onItemAdded = new EventEmitter();
     this.fg = fb.group({
       nombre: ['', Validators.compose([
@@ -36,15 +37,10 @@ export class FormPeliculasComponent implements OnInit {
     fromEvent(elemNombre, 'input').pipe(
       map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
         filter(text => text.length > 2),
-        debounceTime(200), //stop por 0.2 seg para no recibir palabras tan rápido y hacer computo inecesario
+        debounceTime(120), //stop por 0.2 seg para no recibir palabras tan rápido y hacer computo inecesario
         distinctUntilChanged(), // ignorar hasta que sea una palabra distinta a la anterior procesada
-        switchMap(() => ajax('/assets/datos.json')) //simular la consulta de un webservice
-      ).subscribe(AjaxResponse => {
-        console.log(elemNombre.value);
-        console.log(AjaxResponse.response);
-        console.log(AjaxResponse.response.filter(peli => peli.includes(elemNombre.value)));
-        this.searchResults = AjaxResponse.response.filter(peli => peli.includes(elemNombre.value));
-      });
+        switchMap((text: string) => ajax(this.config.apiEndpoint + '/peliculas?q=' + text))
+      ).subscribe(ajaxResponse => this.searchResults = ajaxResponse.response);
   }
   guardar(nombre: string, url: string): boolean {
     let p = new Peliulas(nombre, url);

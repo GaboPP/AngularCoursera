@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, HostBinding, EventEmitter, Output } from '@angular/core';
-import {Peliulas} from '../models/Peliculas.model';
+import {Peliulas} from '../../models/Peliculas.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.module';
-import { VoteUpAction, VoteDownAction, DeleteAction } from '../models/peliculas-state.model';
+import { AppState } from '../../app.module';
+import { VoteUpAction, VoteDownAction, DeleteAction } from '../../models/peliculas-state.model';
 
 @Component({
   selector: 'app-cartelera',

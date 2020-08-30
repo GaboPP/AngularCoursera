@@ -1,14 +1,16 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Peliulas} from '../models/Peliculas.model';
-import { PelisApiClient} from '../models/pelis-api-client.model';
+import { Peliulas} from '../../models/Peliculas.model';
+import { PelisApiClient} from '../../models/pelis-api-client.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.module';
-import { ElegidoFavoritoAction, NuevaPeliAction } from '../models/peliculas-state.model';
+import { AppState } from '../../app.module';
+import { ElegidoFavoritoAction, NuevaPeliAction } from '../../models/peliculas-state.model';
+
 
 @Component({
   selector: 'app-lista-pelis',
   templateUrl: './lista-pelis.component.html',
-  styleUrls: ['./lista-pelis.component.css']
+  styleUrls: ['./lista-pelis.component.css'],
+  providers: [PelisApiClient]
 })
 export class ListaPelisComponent implements OnInit {
   @Output() onItemAdded: EventEmitter<Peliulas> = new EventEmitter();
