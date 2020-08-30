@@ -1,4 +1,4 @@
-version: 2
+version: 3
 jobs:
   build:
     working_directory: ~/myapp/angular-pelis
@@ -6,7 +6,7 @@ jobs:
       - image: circleci/node:8-browsers
     steps:
       - checkout:
-          path: ~/myapp/anular-pelis
+          path: ~/myapp
       - restore_cache:
           key: angular-pelis-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run: npm install
