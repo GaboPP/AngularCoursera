@@ -45,8 +45,8 @@ class PelisApiClientDecorated extends PelisApiClient {
   {provide: APP_CONFIG, useValue: APP_CONFIG_VALUE },
   {provide: PelisApiClient, useClass: PelisApiClientDecorated },
   {provide: PelisApiClientViejo, useExisting: PelisApiClient },
-
-]
+  ],
+  styles: [`mgl-map {height: 75vh;  width: 75vw;  }  `]
 })
 export class SalaComponent implements OnInit {
   peliculas: Peliulas;

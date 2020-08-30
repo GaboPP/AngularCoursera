@@ -8,6 +8,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule, HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import Dexie from 'dexie';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ListaPelisComponent } from './components/lista-pelis/lista-pelis.component';
@@ -28,6 +30,8 @@ import { ReservasModule } from './reservas/reservas.module';
 import { Peliulas } from './models/Peliculas.model';
 import { Observable, from } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
+import { EspiameDirective } from './espiame.directive';
+import { TrackearClickDirective } from './trackear-click.directive';
 
 declare module "@angular/core" {
   interface ModuleWithProviders<T = any> {
@@ -156,7 +160,9 @@ function HttpLoaderFactory(http: HttpClient) {
     CinesComponentComponent,
     CinesMainComponentComponent,
     CinesMasInfoComponentComponent,
-    CinesDetalleComponentComponent
+    CinesDetalleComponentComponent,
+    EspiameDirective,
+    TrackearClickDirective
   ],
   imports: [
     BrowserModule,
@@ -175,7 +181,9 @@ function HttpLoaderFactory(http: HttpClient) {
           provide: TranslateLoader,
           useFactory: (HttpLoaderFactory),
           deps: [HttpClient]
-      }})
+      }}),
+      NgxMapboxGLModule,
+      BrowserAnimationsModule
   ],
   providers: [
     AuthService,

@@ -1,4 +1,4 @@
-<div class="card-content">
+<div class="card-content" [@esFavorito]="Pelicula.isSelected() ? 'estadoFavorito' : 'estadoNoFavorito'">
     <div class="card-img">
         <img src="https://placeimg.com/380/230/nature" alt="">
         <span>

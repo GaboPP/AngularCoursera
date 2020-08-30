@@ -3,11 +3,29 @@ import {Peliulas} from '../../models/Peliculas.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.module';
 import { VoteUpAction, VoteDownAction, DeleteAction } from '../../models/peliculas-state.model';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
 
 @Component({
   selector: 'app-cartelera',
   templateUrl: './cartelera.component.html',
-  styleUrls: ['./cartelera.component.css']
+  styleUrls: ['./cartelera.component.css'],
+  animations: [
+    trigger('esFavorito', [
+      state('estadoFavorito', style({
+        backgroundColor: 'PaleTurquoise'
+      })),
+      state('estadoNoFavorito', style({
+        backgroundColor: 'WhiteSmoke'
+      })),
+      transition('estadoNoFavorito => estadoFavorito', [
+        animate('1s')
+      ]),
+      transition('estadoFavorito => estadoNoFavorito', [
+        animate('0.5s')
+      ]),
+    ])
+  ]
 })
 export class CarteleraComponent implements OnInit {
   @Input() Pelicula: Peliulas;
