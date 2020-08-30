@@ -24,9 +24,15 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
+    autoWatch: false, // consola corriendo y esperando q se edite un archivo
+    browsers: ['Chrome', 'ChromeHeadless', 'ChromeHeadlessCI'], //1
+    customLaunchers: { //2 Para correr los test en un motor Gchrome pero 'headless' osea que no abre la interfaz gráfica
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-gpu', '--disable-translate', '--disable-extensions', '--remote-debugging-port=9223']
+      }
+    },
+    // singleRun: false,
     restartOnFileChange: true
   });
 };
